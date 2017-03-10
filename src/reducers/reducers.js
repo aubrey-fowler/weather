@@ -1,26 +1,25 @@
 import { 
-    SET_SEARCH_FILTER,
+    SET_SELECTED_CITY_DATA,
     RECIEVE_WEATHER_DATA_FOR_CITY,
-    SET_SELECTED_FORECAST
+    SET_SELECTED_FORECAST,
+    CLEAR_SELECTED_FORECAST
 } from '../actions/actionTypes';
 
 const initialState = {
-    searchFilter: '',
+    currentCity: null,
     weatherData: {},
     selectedForecast: null
 };
 
-function setSearchFilter(state, action) {
+function setCityData(state, action) {
     return Object.assign({}, state, {
-        searchFilter: action.searchFilter
+        currentCity: action.cityData
     });
 }
 
-function setWeatherDataForCity(state, action) {
+function recieveWeatherDataForCity(state, action) {
     var dataCopy = state.weatherData;
-    dataCopy[action.cityName] = action.data;
-
-    console.log(' new list::: ', dataCopy);
+    dataCopy[action.id] = action.data;
 
     return Object.assign({}, state, {
         data: dataCopy
@@ -30,21 +29,26 @@ function setWeatherDataForCity(state, action) {
 function setSelectedForecast(state, action) {
     var newSelectedForecast = {
         index: action.index,
-        cityName: action.cityName
+        id: action.id
     };
-
-    console.log('newSelectedForecast::: ', newSelectedForecast);
 
     return Object.assign({}, state, {
         selectedForecast: newSelectedForecast
     });
 }
 
+function clearSelectedForecast(state) {
+    return Object.assign({}, state, {
+        selectedForecast: null
+    });
+}
+
 export function appReducer(state = initialState, action) {
     switch(action.type) {
+        case CLEAR_SELECTED_FORECAST: return clearSelectedForecast(state);
         case SET_SELECTED_FORECAST: return setSelectedForecast(state, action);
-        case SET_SEARCH_FILTER: return setSearchFilter(state, action);
-        case RECIEVE_WEATHER_DATA_FOR_CITY: return setWeatherDataForCity(state, action);
+        case SET_SELECTED_CITY_DATA: return setCityData(state, action);
+        case RECIEVE_WEATHER_DATA_FOR_CITY: return recieveWeatherDataForCity(state, action);
         default: return state;
     }
 }

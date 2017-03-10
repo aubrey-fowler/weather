@@ -15,13 +15,12 @@ class DailyForecast extends React.Component {
     }
 
     render() {
-        const date = new Date(this.props.datetime).toDateString();
+        const date = new Date(this.props.datetime * 1000).toDateString();
 
         return (
-            <div style={{ background: 'pink' }} onClick={this._handleClick}>
-                {date}
-                {' '}
-                {this.props.aveDailyTemp}
+            <div style={{ background: 'pink', display: 'inline-block', padding: '5px', margin: '5px', border: 'black' }} onClick={this._handleClick}>
+                <p>{date}</p>
+                <p>{'Daily Average: '}{this.props.aveDailyTemp}</p>
             </div>
         );
     }

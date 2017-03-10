@@ -14,7 +14,7 @@ export function parseJSON(response) {
 
 export function getResults(data) {
     const result = {
-        cityName: data.city.name,
+        id: data.city.id,
         data: data.list
     };
     return result;

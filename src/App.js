@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setSearchFilter, requestWeatherData, setSelectedForecast } from '../src/actions/actions';
+import { setCityData, requestWeatherData, setSelectedForecast, clearSelectedForecast } from '../src/actions/actions';
 import Wrapper from './components/wrapper';
 import DetailedDailyForecast from './components/detailed-daily-forecast';
 
@@ -10,45 +10,50 @@ class App extends React.Component {
             return (
                 <Wrapper 
                     requestWeatherData={this.props.requestWeatherData} 
-                    currentSearchFilter={this.props.currentSearchFilter} 
-                    setSearchFilter={this.props.setSearchFilter}
+                    currentCity={this.props.currentCity} 
+                    setCityData={this.props.setCityData}
                     onClick={this.props.setSelectedForecast}
                     data={this.props.data} />
             );
         }
 
         return (
-            <DetailedDailyForecast data={this.props.data[this.props.selectedForecast.index]} />
+            <DetailedDailyForecast 
+                onClose={this.props.clearSelectedForecast} 
+                data={this.props.data[this.props.selectedForecast.index]} />
         );
     }
 }
 
 const mapStateToProps = (store) => {
     return { 
-        currentSearchFilter: store.searchFilter,
-        data: store.weatherData['London'],
+        currentCity: store.currentCity,
+        data: store.currentCity == null ? null : store.weatherData[store.currentCity.id],
         selectedForecast: store.selectedForecast
     };
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setSearchFilter: (searchFilter) => {
-            dispatch(setSearchFilter(searchFilter));
+        setCityData: (id) => {
+            dispatch(setCityData(id));
         },
-        requestWeatherData: (searchFilter) => {
-            dispatch(requestWeatherData(searchFilter));
+        requestWeatherData: (id) => {
+            dispatch(requestWeatherData(id));
         },
-        setSelectedForecast: (cityName, index) => {
-            dispatch(setSelectedForecast(cityName, index));
+        setSelectedForecast: (id, index) => {
+            dispatch(setSelectedForecast(id, index));
+        },
+        clearSelectedForecast: () => {
+            dispatch(clearSelectedForecast());
         }
     };
 }
 
 App.propTypes = {
-    currentSearchFilter: React.PropTypes.string.isRequired,
+    currentCity: React.PropTypes.object,
     requestWeatherData: React.PropTypes.func.isRequired,
-    setSearchFilter: React.PropTypes.func.isRequired
+    setCityData: React.PropTypes.func.isRequired
 };
 
 App.contextTypes = {

@@ -20,7 +20,7 @@ class CitySearchComponent extends React.Component {
 
     _handleOnChange(value) {
         console.log(value);
-        this.props.onSetSearchFilter(value);
+        this.props.onsetCityData(value);
     }
 
     render() {
@@ -37,7 +37,7 @@ class CitySearchComponent extends React.Component {
 
 CitySearchComponent.propTypes = {
     requestWeatherData: React.PropTypes.func.isRequired,
-    onSetSearchFilter: React.PropTypes.func.isRequired,
+    onsetCityData: React.PropTypes.func.isRequired,
     currentSearchFilter: React.PropTypes.string.isRequired
 };
 

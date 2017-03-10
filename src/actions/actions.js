@@ -2,45 +2,51 @@
 import 'whatwg-fetch';
 
 import { 
-    SET_SEARCH_FILTER,
+    SET_SELECTED_CITY_DATA,
 	RECIEVE_WEATHER_DATA_FOR_CITY,
-	SET_SELECTED_FORECAST
+	SET_SELECTED_FORECAST,
+    CLEAR_SELECTED_FORECAST
 } from '../actions/actionTypes';
 
 import { checkStatus, parseJSON, getResults } from './actionUtils';
 import { NUMBER_OF_DAYS_TO_FORECAST } from '../constants/constants';
 
-export function setSearchFilter(searchFilter) {  
+export function clearSelectedForecast() {
     return {
-        type: SET_SEARCH_FILTER,
-        searchFilter
+        type: CLEAR_SELECTED_FORECAST
     };
 }
 
-function receiveWeatherData(cityName, data) {
-	console.log('receiveWeatherData::: ', cityName, data);
+export function setCityData(cityData) {  
+    return {
+        type: SET_SELECTED_CITY_DATA,
+        cityData
+    };
+}
+
+function receiveWeatherData(id, data) {
     return {
         type: RECIEVE_WEATHER_DATA_FOR_CITY,
-        cityName,
+        id,
         data
     };
 }
 
-export function requestWeatherData(searchFilter) {
+export function requestWeatherData(id) {
     return dispatch => {
-        return fetch(`http://api.openweathermap.org/data/2.5/forecast/daily?q=${searchFilter}&units=metric&cnt=${NUMBER_OF_DAYS_TO_FORECAST}&APPID=7727b4d189275f405df0eaa13267eaa2`)
+        return fetch(`http://api.openweathermap.org/data/2.5/forecast/daily?id=${id}&units=metric&cnt=${NUMBER_OF_DAYS_TO_FORECAST}&APPID=7727b4d189275f405df0eaa13267eaa2`)
             .then(checkStatus)
             .then(parseJSON)
             .then(getResults)
-            .then(result => dispatch(receiveWeatherData(result.cityName, result.data)))
+            .then(result => dispatch(receiveWeatherData(result.id, result.data)))
             .catch(error => console.log('request failed', error));
     }
 }
 
-export function setSelectedForecast(cityName, index) {
+export function setSelectedForecast(id, index) {
     return {
         type: SET_SELECTED_FORECAST,
-        cityName,
+        id,
         index
     };
 }

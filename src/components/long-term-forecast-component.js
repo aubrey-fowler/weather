@@ -17,9 +17,14 @@ class LongTermForecastComponent extends React.Component {
     }
 
     render() {
+        const flagSource = `http://openweathermap.org/images/flags/${this.props.countryName.toLowerCase()}.png`;
         return (
             <div>
-                {this.props.cityName}{' '}{NUMBER_OF_DAYS_TO_FORECAST}{'-Day Forecast'}
+                {this.props.cityName}{', '}{this.props.countryName}{' '}
+
+                <img src={flagSource} alt={this.props.countryName} />
+
+                {NUMBER_OF_DAYS_TO_FORECAST}{'-Day Forecast'}
                 {this.props.data.map((entry, index) => (
                     <DailyForecast 
                         key={entry.dt}
@@ -35,6 +40,7 @@ class LongTermForecastComponent extends React.Component {
 
 LongTermForecastComponent.propTypes = {
     cityName: React.PropTypes.string.isRequired,
+    countryName: React.PropTypes.string.isRequired,
     onClick: React.PropTypes.func.isRequired,
     data: React.PropTypes.array.isRequired
 };
