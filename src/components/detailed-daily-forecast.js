@@ -2,6 +2,7 @@ import React from 'react';
 
 class DetailedDailyForecast extends React.Component {
     render() {
+        console.log('data: ', this.props.data);
     	const date = new Date(this.props.data.dt * 1000).toDateString();
         return (
             <div style={{ background: 'green' }}>

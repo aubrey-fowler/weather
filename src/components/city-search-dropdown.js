@@ -81,7 +81,7 @@ class CitySearchDropdown extends React.Component {
 CitySearchDropdown.propTypes = {
     currentCity: React.PropTypes.object,
     requestWeatherData: React.PropTypes.func.isRequired,
-    setCityData: React.PropTypes.func.isRequired,
+    setCityData: React.PropTypes.func.isRequired
 };
 
 export default CitySearchDropdown;
