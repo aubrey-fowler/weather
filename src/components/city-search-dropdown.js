@@ -2,8 +2,8 @@ import React from 'react';
 import VirtualizedSelect from 'react-virtualized-select';
 import { checkStatus } from '../actions/actionUtils';
 
-import 'react-select/dist/react-select.css';
-import 'react-virtualized/styles.css';
+//import 'react-select/dist/react-select.css';
+//import 'react-virtualized/styles.css';
 //import 'react-virtualized-select/styles.css';
 
 function CountryOptionRenderer ({ focusedOption, focusedOptionIndex, focusOption, key, labelKey, option, options, selectValue, style, valueArray }) {   
