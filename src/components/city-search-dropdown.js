@@ -66,6 +66,8 @@ class CitySearchDropdown extends React.Component {
 
     render() {
         return (
+        <div>
+            {'Search for your city here: '}
             <VirtualizedSelect
                 loadOptions={this._getOptions}
                 async={true}
@@ -74,6 +76,7 @@ class CitySearchDropdown extends React.Component {
                 onChange={this._handleSelectionChange}
                 optionRenderer={CountryOptionRenderer}
                 value={this.state.selectValue} />
+            </div>
         );
     }
 }
