@@ -4,7 +4,7 @@ import { checkStatus } from '../actions/actionUtils';
 
 import 'react-select/dist/react-select.css';
 import 'react-virtualized/styles.css';
-import 'react-virtualized-select/styles.css';
+//import 'react-virtualized-select/styles.css';
 
 function CountryOptionRenderer ({ focusedOption, focusedOptionIndex, focusOption, key, labelKey, option, options, selectValue, style, valueArray }) {   
     const flagSource = `http://openweathermap.org/images/flags/${option.sys.country.toLowerCase()}.png`;
