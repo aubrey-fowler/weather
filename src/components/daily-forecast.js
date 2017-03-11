@@ -20,6 +20,7 @@ class DailyForecast extends React.Component {
         return (
             <div style={{ background: 'pink', display: 'inline-block', padding: '5px', margin: '5px', border: 'black' }} onClick={this._handleClick}>
                 <p>{date}</p>
+                <img src={`http://openweathermap.org/img/w/${this.props.iconId}.png`} alt={this.props.iconId} />
                 <p>{'Daily Average: '}{this.props.aveDailyTemp}</p>
             </div>
         );
@@ -29,6 +30,7 @@ class DailyForecast extends React.Component {
 DailyForecast.propTypes = {
     datetime: React.PropTypes.number.isRequired,
     aveDailyTemp: React.PropTypes.number.isRequired,
+    iconId: React.PropTypes.string.isRequired,
     index: React.PropTypes.number.isRequired,
     onClick: React.PropTypes.func.isRequired
 };

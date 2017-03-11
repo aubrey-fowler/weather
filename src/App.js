@@ -6,21 +6,22 @@ import DetailedDailyForecast from './components/detailed-daily-forecast';
 
 class App extends React.Component {
     render() {
-        if (this.props.selectedForecast == null) {
-            return (
-                <Wrapper 
-                    requestWeatherData={this.props.requestWeatherData} 
-                    currentCity={this.props.currentCity} 
-                    setCityData={this.props.setCityData}
-                    onClick={this.props.setSelectedForecast}
-                    data={this.props.data} />
-            );
-        }
-
         return (
-            <DetailedDailyForecast 
-                onClose={this.props.clearSelectedForecast} 
-                data={this.props.data[this.props.selectedForecast.index]} />
+            <div>
+                <h1>Weather Forecast</h1>
+                {this.props.selectedForecast == null ? (
+                    <Wrapper 
+                        requestWeatherData={this.props.requestWeatherData} 
+                        currentCity={this.props.currentCity} 
+                        setCityData={this.props.setCityData}
+                        onClick={this.props.setSelectedForecast}
+                        data={this.props.data} />
+                ) : (
+                    <DetailedDailyForecast 
+                        onClose={this.props.clearSelectedForecast} 
+                        data={this.props.data[this.props.selectedForecast.index]} />
+                )}
+            </div>
         );
     }
 }
