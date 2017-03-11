@@ -1,12 +1,10 @@
+--- 
+build: 
+  ci: 
+    - "npm install"
+    - "npm test"
+env: 
+  - XUNIT_FILE=shippable/testresults/result.xml
 language: node_js
-
-node_js:
-  - 7.5.0
-
-env:
-- XUNIT_FILE=shippable/testresults/result.xml
-
-build:
-  ci:
-    - npm install
-    - npm test
+node_js: 
+  - "7.5.0"
