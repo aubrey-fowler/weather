@@ -1,0 +1,13 @@
+deployment:
+  production:
+    branch: master
+    codedeploy:
+      weather-app:
+        application_root: /
+        region: us-west-2
+        revision_location:
+          revision_type: S3
+          s3_location:
+            bucket: weather-app-quinn
+            key_pattern: weather-app-{BRANCH}-{SHORT_COMMIT}
+        deployment_group: my-deployment-group
