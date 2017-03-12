@@ -4,10 +4,10 @@ deployment:
     codedeploy:
       weather-app:
         application_root: /
-        region: us-west-2
+        region: eu-west-1
         revision_location:
           revision_type: S3
           s3_location:
-            bucket: weather-app-quinn
+            bucket: weather-app-quinn-ireland
             key_pattern: weather-app-{BRANCH}-{SHORT_COMMIT}
         deployment_group: my-deployment-group
